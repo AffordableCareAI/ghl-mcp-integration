@@ -1,0 +1,31 @@
+{
+  "mcpServers": {
+    "ghl-main": {
+      "type": "http",
+      "url": "https://services.leadconnectorhq.com/mcp/",
+      "headers": {
+        "Authorization": "Bearer ${GHL_PIT_MAIN}",
+        "locationId": "${GHL_LOCATION_MAIN}",
+        "MCP-Protocol-Version": "2025-06-18"
+      }
+    },
+    "ghl-strategic": {
+      "type": "http",
+      "url": "https://services.leadconnectorhq.com/mcp/",
+      "headers": {
+        "Authorization": "Bearer ${GHL_PIT_STRATEGIC}",
+        "locationId": "${GHL_LOCATION_STRATEGIC}",
+        "MCP-Protocol-Version": "2025-06-18"
+      }
+    },
+    "ghl-agency": {
+      "type": "http",
+      "url": "https://services.leadconnectorhq.com/mcp/",
+      "headers": {
+        "Authorization": "Bearer ${GHL_PIT_AGENCY}",
+        "locationId": "${GHL_LOCATION_AGENCY}",
+        "MCP-Protocol-Version": "2025-06-18"
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+.env
+*.enc
+node_modules/
+openclaw-skill/config.json
+.ghl-mcp/

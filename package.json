@@ -1,0 +1,23 @@
+{
+  "name": "ghl-mcp-integration",
+  "version": "1.0.0",
+  "description": "GoHighLevel MCP integration for Claude Code and OpenClaw",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "test:client": "node --test tests/mcp-client.test.js",
+    "test:monitor": "node --test tests/monitor.test.js",
+    "test:actions": "node --test tests/actions.test.js",
+    "manage": "node cli/ghl-manager.js",
+    "monitor": "node openclaw-skill/ghl_monitor.js",
+    "cron": "node openclaw-skill/cron_schedule.js"
+  },
+  "keywords": ["ghl", "gohighlevel", "mcp", "openclaw", "crm"],
+  "author": "Mike Moore <mike@strategicaiarchitects.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}

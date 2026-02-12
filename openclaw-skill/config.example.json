@@ -1,0 +1,66 @@
+{
+  "locations": {
+    "main": {
+      "name": "AffordableCareGroup",
+      "alias": "main",
+      "token": "ENV:GHL_PIT_MAIN",
+      "locationId": "ENV:GHL_LOCATION_MAIN",
+      "pipelines": {
+        "ai_audit": {
+          "name": "Strategic AI Audit Pipeline",
+          "stages": {
+            "audit_requested": "Audit Requested",
+            "audit_in_progress": "Audit In Progress",
+            "audit_completed": "Audit Completed",
+            "strategy_call": "Strategy Call Scheduled",
+            "proposal_sent": "Proposal Sent",
+            "contract_signed": "Contract Signed",
+            "closed_lost": "Closed Lost"
+          }
+        },
+        "ai_implementation": {
+          "name": "AI System Implementation",
+          "stages": {
+            "contract_signed": "Contract Signed",
+            "system_design": "System Design",
+            "ai_training": "AI Training",
+            "integration_testing": "Integration & Testing",
+            "go_live": "Go Live",
+            "optimization": "Optimization Phase"
+          }
+        }
+      },
+      "customFields": {
+        "annual_revenue": "annual_revenue",
+        "team_size": "team_size",
+        "monthly_leads": "current_monthly_leads",
+        "scaling_challenge": "biggest_scaling_challenge",
+        "primary_goal": "primary_goal",
+        "call_outcome": "call_outcome",
+        "audit_status": "audit_status"
+      },
+      "tags": {
+        "lead_source": ["AI-Audit-Lead", "Revenue-Assessment", "Referral", "Organic"],
+        "lead_quality": ["High-Value-Lead", "Priority-Booking", "Qualified-Lead", "Nurture-Lead"],
+        "client_status": ["Active-Client", "Audit-Client", "Implementation-Client"],
+        "insurance_type": ["ACA-Health", "Medicare", "Life-Insurance", "P-and-C", "Multiple-Lines"]
+      },
+      "thresholds": {
+        "stale_lead_hours": 48,
+        "stuck_opportunity_days": 7,
+        "slow_response_minutes": 30
+      }
+    }
+  },
+  "monitoring": {
+    "stale_lead_check_interval": "30m",
+    "digest_times": ["10:00", "15:00"],
+    "weekly_report_day": "monday",
+    "weekly_report_time": "09:00",
+    "morning_digest_time": "08:00"
+  },
+  "notifications": {
+    "channel": "telegram",
+    "urgent_threshold": 5
+  }
+}
