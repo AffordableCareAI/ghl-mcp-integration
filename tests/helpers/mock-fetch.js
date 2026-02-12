@@ -6,18 +6,42 @@
 const MOCK_SESSION_ID = 'mock-session-abc123';
 
 const MOCK_TOOLS = [
-  { name: 'get-contacts', description: 'Get contacts', inputSchema: { type: 'object', properties: {} } },
-  { name: 'get-contact', description: 'Get contact by ID', inputSchema: { type: 'object', properties: { contactId: { type: 'string' } } } },
-  { name: 'upsert-contact', description: 'Create or update contact', inputSchema: { type: 'object', properties: {} } },
-  { name: 'add-tags', description: 'Add tags to contact', inputSchema: { type: 'object', properties: {} } },
-  { name: 'remove-tags', description: 'Remove tags from contact', inputSchema: { type: 'object', properties: {} } },
-  { name: 'get-all-tasks', description: 'Get all tasks for contact', inputSchema: { type: 'object', properties: {} } },
-  { name: 'search-conversation', description: 'Search conversations', inputSchema: { type: 'object', properties: {} } },
-  { name: 'get-messages', description: 'Get messages', inputSchema: { type: 'object', properties: {} } },
-  { name: 'send-a-new-message', description: 'Send message', inputSchema: { type: 'object', properties: {} } },
-  { name: 'search-opportunity', description: 'Search opportunities', inputSchema: { type: 'object', properties: {} } },
-  { name: 'update-opportunity', description: 'Update opportunity', inputSchema: { type: 'object', properties: {} } },
-  { name: 'get-pipelines', description: 'Get pipelines', inputSchema: { type: 'object', properties: {} } },
+  { name: 'contacts_get-contacts', description: 'Get contacts', inputSchema: { type: 'object', properties: {} } },
+  { name: 'contacts_get-contact', description: 'Get contact by ID', inputSchema: { type: 'object', properties: { contactId: { type: 'string' } } } },
+  { name: 'contacts_upsert-contact', description: 'Create or update contact', inputSchema: { type: 'object', properties: {} } },
+  { name: 'contacts_add-tags', description: 'Add tags to contact', inputSchema: { type: 'object', properties: {} } },
+  { name: 'contacts_remove-tags', description: 'Remove tags from contact', inputSchema: { type: 'object', properties: {} } },
+  { name: 'contacts_get-all-tasks', description: 'Get all tasks for contact', inputSchema: { type: 'object', properties: {} } },
+  { name: 'contacts_create-contact', description: 'Create contact', inputSchema: { type: 'object', properties: {} } },
+  { name: 'contacts_update-contact', description: 'Update contact', inputSchema: { type: 'object', properties: {} } },
+  { name: 'conversations_search-conversation', description: 'Search conversations', inputSchema: { type: 'object', properties: {} } },
+  { name: 'conversations_get-messages', description: 'Get messages', inputSchema: { type: 'object', properties: {} } },
+  { name: 'conversations_send-a-new-message', description: 'Send message', inputSchema: { type: 'object', properties: {} } },
+  { name: 'opportunities_search-opportunity', description: 'Search opportunities', inputSchema: { type: 'object', properties: {} } },
+  { name: 'opportunities_update-opportunity', description: 'Update opportunity', inputSchema: { type: 'object', properties: {} } },
+  { name: 'opportunities_get-pipelines', description: 'Get pipelines', inputSchema: { type: 'object', properties: {} } },
+  { name: 'opportunities_get-opportunity', description: 'Get opportunity', inputSchema: { type: 'object', properties: {} } },
+  { name: 'locations_get-location', description: 'Get location', inputSchema: { type: 'object', properties: {} } },
+  { name: 'locations_get-custom-fields', description: 'Get custom fields', inputSchema: { type: 'object', properties: {} } },
+  { name: 'calendars_get-calendar-events', description: 'Get calendar events', inputSchema: { type: 'object', properties: {} } },
+  { name: 'calendars_get-appointment-notes', description: 'Get appointment notes', inputSchema: { type: 'object', properties: {} } },
+  { name: 'payments_list-transactions', description: 'List transactions', inputSchema: { type: 'object', properties: {} } },
+  { name: 'payments_get-order-by-id', description: 'Get order by ID', inputSchema: { type: 'object', properties: {} } },
+  { name: 'emails_fetch-template', description: 'Fetch email template', inputSchema: { type: 'object', properties: {} } },
+  { name: 'emails_create-template', description: 'Create email template', inputSchema: { type: 'object', properties: {} } },
+  { name: 'social-media-posting_create-post', description: 'Create social post', inputSchema: { type: 'object', properties: {} } },
+  { name: 'social-media-posting_get-post', description: 'Get social post', inputSchema: { type: 'object', properties: {} } },
+  { name: 'social-media-posting_get-posts', description: 'Get social posts', inputSchema: { type: 'object', properties: {} } },
+  { name: 'social-media-posting_edit-post', description: 'Edit social post', inputSchema: { type: 'object', properties: {} } },
+  { name: 'social-media-posting_get-account', description: 'Get social account', inputSchema: { type: 'object', properties: {} } },
+  { name: 'social-media-posting_get-social-media-statistics', description: 'Get social stats', inputSchema: { type: 'object', properties: {} } },
+  { name: 'blogs_get-blogs', description: 'Get blogs', inputSchema: { type: 'object', properties: {} } },
+  { name: 'blogs_get-blog-post', description: 'Get blog post', inputSchema: { type: 'object', properties: {} } },
+  { name: 'blogs_create-blog-post', description: 'Create blog post', inputSchema: { type: 'object', properties: {} } },
+  { name: 'blogs_update-blog-post', description: 'Update blog post', inputSchema: { type: 'object', properties: {} } },
+  { name: 'blogs_check-url-slug-exists', description: 'Check blog URL slug', inputSchema: { type: 'object', properties: {} } },
+  { name: 'blogs_get-all-categories-by-location', description: 'Get blog categories', inputSchema: { type: 'object', properties: {} } },
+  { name: 'blogs_get-all-blog-authors-by-location', description: 'Get blog authors', inputSchema: { type: 'object', properties: {} } },
 ];
 
 const MOCK_CONTACTS = {
@@ -89,11 +113,11 @@ function createMockFetch(overrides = {}) {
 
       if (overrides[toolName]) {
         content = overrides[toolName];
-      } else if (toolName === 'get-contacts') {
+      } else if (toolName === 'contacts_get-contacts') {
         content = MOCK_CONTACTS;
-      } else if (toolName === 'get-pipelines') {
+      } else if (toolName === 'opportunities_get-pipelines') {
         content = MOCK_PIPELINES;
-      } else if (toolName === 'search-opportunity') {
+      } else if (toolName === 'opportunities_search-opportunity') {
         content = MOCK_OPPORTUNITIES;
       } else {
         content = { success: true };

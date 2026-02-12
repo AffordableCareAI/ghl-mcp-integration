@@ -113,9 +113,12 @@ update-opportunity with new stageId
 
 ## GHL MCP Available Tools (36)
 
-**Contacts:** get-contacts, get-contact, upsert-contact, add-tags, remove-tags, get-all-tasks
-**Conversations:** search-conversation, get-messages, send-a-new-message
-**Opportunities:** search-opportunity, update-opportunity, get-pipelines
-**Calendars:** get-calendar-events, get-appointment-notes
-**Payments:** list-transactions, list-orders, get-order
-**Other:** email templates, blogs, social media, custom fields/values
+**Contacts:** contacts_get-contacts, contacts_get-contact, contacts_create-contact, contacts_update-contact, contacts_upsert-contact, contacts_add-tags, contacts_remove-tags, contacts_get-all-tasks
+**Conversations:** conversations_search-conversation, conversations_get-messages, conversations_send-a-new-message
+**Opportunities:** opportunities_get-pipelines, opportunities_get-opportunity, opportunities_search-opportunity, opportunities_update-opportunity
+**Locations:** locations_get-location, locations_get-custom-fields
+**Calendars:** calendars_get-calendar-events, calendars_get-appointment-notes
+**Payments:** payments_list-transactions, payments_get-order-by-id
+**Emails:** emails_fetch-template, emails_create-template
+**Social Media:** social-media-posting_create-post, social-media-posting_get-post, social-media-posting_get-posts, social-media-posting_edit-post, social-media-posting_get-account, social-media-posting_get-social-media-statistics
+**Blogs:** blogs_get-blogs, blogs_get-blog-post, blogs_create-blog-post, blogs_update-blog-post, blogs_check-url-slug-exists, blogs_get-all-categories-by-location, blogs_get-all-blog-authors-by-location

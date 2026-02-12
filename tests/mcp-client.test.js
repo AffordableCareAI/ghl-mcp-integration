@@ -76,7 +76,7 @@ describe('ghl-mcp-client', () => {
 
       assert.ok(result.tools);
       assert.equal(result.tools.length, MOCK_TOOLS.length);
-      assert.equal(result.tools[0].name, 'get-contacts');
+      assert.equal(result.tools[0].name, 'contacts_get-contacts');
     });
 
     it('should auto-initialize if not initialized', async () => {
@@ -97,7 +97,7 @@ describe('ghl-mcp-client', () => {
       globalThis.fetch = m.fetch;
 
       const client = createMcpClient({ token: 'test-token', locationId: 'test-loc' });
-      const result = await client.callTool('get-contacts', {});
+      const result = await client.callTool('contacts_get-contacts', {});
 
       assert.ok(result.content);
       assert.equal(result.content[0].type, 'text');
@@ -112,7 +112,7 @@ describe('ghl-mcp-client', () => {
       globalThis.fetch = m.fetch;
 
       const client = createMcpClient({ token: 'my-token', locationId: 'my-loc' });
-      await client.callTool('get-contacts', {});
+      await client.callTool('contacts_get-contacts', {});
 
       // Find the tools/call request (skip initialize + notification)
       const toolCall = m.calls.find(c => c.body.method === 'tools/call');

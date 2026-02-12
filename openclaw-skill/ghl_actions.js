@@ -36,19 +36,19 @@ function createActions(locationConfig) {
     const args = { query, ...options };
     if (options.limit) args.limit = options.limit;
     log('info', 'Searching contacts', { query });
-    return call('get-contacts', args);
+    return call('contacts_get-contacts', args);
   }
 
   async function getContactDetails(contactId) {
     await ensureInitialized();
     log('info', 'Getting contact details', { contactId });
-    return call('get-contact', { contactId });
+    return call('contacts_get-contact', { contactId });
   }
 
   async function upsertContact(contactData) {
     await ensureInitialized();
     log('info', 'Upserting contact', { email: contactData.email, phone: contactData.phone });
-    return call('upsert-contact', contactData);
+    return call('contacts_upsert-contact', contactData);
   }
 
   async function tagContacts(contactIds, tags) {
@@ -59,7 +59,7 @@ function createActions(locationConfig) {
 
     const results = [];
     for (const contactId of ids) {
-      const result = await call('add-tags', { contactId, tags: tagList });
+      const result = await call('contacts_add-tags', { contactId, tags: tagList });
       results.push({ contactId, result });
     }
     return results;
@@ -73,7 +73,7 @@ function createActions(locationConfig) {
 
     const results = [];
     for (const contactId of ids) {
-      const result = await call('remove-tags', { contactId, tags: tagList });
+      const result = await call('contacts_remove-tags', { contactId, tags: tagList });
       results.push({ contactId, result });
     }
     return results;
@@ -81,7 +81,7 @@ function createActions(locationConfig) {
 
   async function getContactTasks(contactId) {
     await ensureInitialized();
-    return call('get-all-tasks', { contactId });
+    return call('contacts_get-all-tasks', { contactId });
   }
 
   // ─── Conversation Operations ──────────────────────────────
@@ -89,14 +89,14 @@ function createActions(locationConfig) {
   async function getConversationHistory(contactId, options = {}) {
     await ensureInitialized();
     log('info', 'Getting conversation history', { contactId });
-    const convResult = await call('search-conversation', { contactId });
+    const convResult = await call('conversations_search-conversation', { contactId });
     const conversations = convResult?.content?.[0]?.text
       ? JSON.parse(convResult.content[0].text)
       : convResult;
 
     if (conversations?.conversations?.length > 0) {
       const conversationId = conversations.conversations[0].id;
-      return call('get-messages', { conversationId, ...options });
+      return call('conversations_get-messages', { conversationId, ...options });
     }
     return { messages: [] };
   }
@@ -104,7 +104,7 @@ function createActions(locationConfig) {
   async function sendMessage(contactId, { type = 'SMS', message }) {
     await ensureInitialized();
     log('info', 'Sending message', { contactId, type });
-    return call('send-a-new-message', {
+    return call('conversations_send-a-new-message', {
       contactId,
       type,
       message,
@@ -115,19 +115,19 @@ function createActions(locationConfig) {
 
   async function getPipelines() {
     await ensureInitialized();
-    return call('get-pipelines', {});
+    return call('opportunities_get-pipelines', {});
   }
 
   async function searchOpportunities(options = {}) {
     await ensureInitialized();
     log('info', 'Searching opportunities', options);
-    return call('search-opportunity', options);
+    return call('opportunities_search-opportunity', options);
   }
 
   async function moveOpportunity(opportunityId, stageId, options = {}) {
     await ensureInitialized();
     log('info', 'Moving opportunity', { opportunityId, stageId });
-    return call('update-opportunity', {
+    return call('opportunities_update-opportunity', {
       id: opportunityId,
       stageId,
       ...options,
